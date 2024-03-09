@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "601640809055",
+    "project_id": "rt-pintar-6bfbd",
+    "storage_bucket": "rt-pintar-6bfbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601640809055:android:270c13536fa0a4cffaa1ea",
+        "android_client_info": {
+          "package_name": "id.forestnerd.rtkita"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQYb9Y61O5tb_ITUfh-drXjtMaBTQVfBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
