@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
 import 'firebase_options.dart';
+import 'package:dcdg/dcdg.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   WidgetsFlutterBinding.ensureInitialized();

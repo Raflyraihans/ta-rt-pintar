@@ -1,0 +1,1381 @@
+@startuml
+
+!pragma layout smetana
+
+set namespaceSeparator ::
+
+class "rtkita::app::providers::auth.dart::AuthProvider" {
+  +GetStorage box
+  +void register()
+  +Future<bool?> login()
+  +Future<bool?> getDataDiri()
+  +void editProfile()
+  +dynamic logout()
+}
+
+"rtkita::app::providers::auth.dart::AuthProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::auth.dart::AuthProvider"
+
+class "rtkita::app::providers::donation.dart::DonationProvider" {
+  +GetStorage box
+  +void getListDonation()
+  +void getListReceiveDonation()
+  +void sendDonation()
+}
+
+"rtkita::app::providers::donation.dart::DonationProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::donation.dart::DonationProvider"
+
+class "rtkita::app::providers::announcement.dart::AnnouncementProvider" {
+  +GetStorage box
+  +Future<dynamic> getListAnnouncement()
+  +void sendPengumuman()
+}
+
+"rtkita::app::providers::announcement.dart::AnnouncementProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::announcement.dart::AnnouncementProvider"
+
+class "rtkita::app::providers::complaint.dart::AduanProvider" {
+  +GetStorage box
+  +void getListComplaint()
+  +void getListComplaintPengurus()
+  +void updateStatusComplaint()
+  +Future<List<Complaint?>> getHistoryComplaint()
+  +void sendRequestAduan()
+  +void sendRequestPengumuman()
+}
+
+"rtkita::app::providers::complaint.dart::AduanProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::complaint.dart::AduanProvider"
+
+class "rtkita::app::providers::verifikasi_kk.dart::VerifKKProvider" {
+  +void checkKK()
+}
+
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::verifikasi_kk.dart::VerifKKProvider"
+
+class "rtkita::app::providers::kontak_darurat.dart::KontakProvider" {
+  +GetStorage box
+  +void getListKontak()
+}
+
+"rtkita::app::providers::kontak_darurat.dart::KontakProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::kontak_darurat.dart::KontakProvider"
+
+class "rtkita::app::providers::panic_button.dart::PanicProvider" {
+  +GetStorage box
+  +void sendPanic()
+  +void getListPanic()
+}
+
+"rtkita::app::providers::panic_button.dart::PanicProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::panic_button.dart::PanicProvider"
+
+class "rtkita::app::providers::persuratan.dart::PersuratanProvider" {
+  +GetStorage box
+  +Future<List<CoverLetter?>> getListSurat()
+  +void getPengurusListSurat()
+  +void updateStatusSurat()
+  +void getFamilyData()
+  +void sendRequestSurat()
+}
+
+"rtkita::app::providers::persuratan.dart::PersuratanProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::persuratan.dart::PersuratanProvider"
+
+class "rtkita::app::providers::polling.dart::PollingProvider" {
+  +GetStorage box
+  +void getListPolling()
+  +void selectPolling()
+  +void addPolling()
+  +void getDetailPolling()
+}
+
+"rtkita::app::providers::polling.dart::PollingProvider" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_connect::connect.dart::GetConnect" <|-- "rtkita::app::providers::polling.dart::PollingProvider"
+
+class "rtkita::app::utils::statistic_data.dart::IPLData" {
+  +String month
+  +double value
+}
+
+class "rtkita::app::utils::currency_format.dart::CurrencyFormat" {
+  {static} +String convertToIdr()
+}
+
+class "rtkita::app::model::family_member.dart::FamilyMember" {
+  +int? id
+  +int? userId
+  +int? familyCardId
+  +String? familyMemberName
+  +String? nik
+  +String? gender
+  +String? birthPlace
+  +String? birthDate
+  +String? job
+  +String? religion
+  +String? education
+  +String? familyMemberStatus
+  +String? citizenship
+  +String? maritalStatus
+  +String? address
+  +String? avatar
+  +int? verified
+  +String? status
+  +int? administrator
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::donation.dart::Donation" {
+  +int? id
+  +int? rukunTetanggaId
+  +String? title
+  +String? description
+  +String? rekeningNumber
+  +String? picture
+  +String? status
+  +String? donationAmount
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::announcement.dart::Announcement" {
+  +int? id
+  +int? rukunTetanggaId
+  +String? title
+  +String? description
+  +String? status
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::cover_letter.dart::CoverLetter" {
+  +int? id
+  +int? rukunTetanggaId
+  +int? familyMemberId
+  +String? letterNumber
+  +String? year
+  +String? title
+  +String? description
+  +String? file
+  +String? createdBy
+  +String? status
+  +String? createdAt
+  +String? updatedAt
+  +FamilyMember? familyMember
+  +Map<String, dynamic> toJson()
+}
+
+"rtkita::app::model::cover_letter.dart::CoverLetter" o-- "rtkita::app::model::family_member.dart::FamilyMember"
+
+class "rtkita::app::model::complaint.dart::Complaint" {
+  +int? id
+  +int? rukunTetanggaId
+  +int? userId
+  +String? title
+  +String? description
+  +String? status
+  +String? note
+  +String? familyMemberName
+  +String? createdAt
+  +String? updatedAt
+  +List<ComplaintDocuments>? complaintDocuments
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::complaint.dart::ComplaintDocuments" {
+  +int? id
+  +int? complaintId
+  +String? document
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::payment.dart::Payment" {
+  +int? id
+  +int? rukunTetanggaId
+  +int? donationId
+  +String? donationAmount
+  +String? picture
+  +String? status
+  +String? createdAt
+  +String? updatedAt
+  +dynamic familyMember
+  +dynamic donation
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::family_card.dart::FamilyCard" {
+  +int? id
+  +int? houseId
+  +String? familyCardNumber
+  +String? status
+  +String? createdAt
+  +String? updatedAt
+  +House? house
+  +Map<String, dynamic> toJson()
+}
+
+"rtkita::app::model::family_card.dart::FamilyCard" o-- "rtkita::app::model::family_card.dart::House"
+
+class "rtkita::app::model::family_card.dart::House" {
+  +int? id
+  +int? rukunTetanggaId
+  +String? houseBlock
+  +String? houseNumber
+  +String? invoiceIpl
+  +double? lat
+  +double? lng
+  +String? createdAt
+  +String? updatedAt
+  +RukunTetangga? rukunTetangga
+  +Map<String, dynamic> toJson()
+}
+
+"rtkita::app::model::family_card.dart::House" o-- "rtkita::app::model::family_card.dart::RukunTetangga"
+
+class "rtkita::app::model::family_card.dart::RukunTetangga" {
+  +int? id
+  +String? rukunTetanggaNumber
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::panic_button.dart::PanicButton" {
+  +int? id
+  +int? rukunTetanggaId
+  +int? userId
+  +String? username
+  +String? phoneNumber
+  +String? houseNumber
+  +double? lat
+  +double? lng
+  +String? status
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::warga.dart::Warga" {
+  +int? id
+  +int? userId
+  +int? groupChatId
+  +String? createdAt
+  +String? updatedAt
+  +User? user
+  +Map<String, dynamic> toJson()
+}
+
+"rtkita::app::model::warga.dart::Warga" o-- "rtkita::app::model::warga.dart::User"
+
+class "rtkita::app::model::warga.dart::User" {
+  +int? id
+  +String? email
+  +String? phoneNumber
+  +String? fcmToken
+  +String? createdAt
+  +String? updatedAt
+  +FamilyMember? familyMember
+  +Map<String, dynamic> toJson()
+}
+
+"rtkita::app::model::warga.dart::User" o-- "rtkita::app::model::family_member.dart::FamilyMember"
+
+class "rtkita::app::model::dues.dart::Donation" {
+  +int? id
+  +int? rukunTetanggaId
+  +String? title
+  +String? description
+  +String? rekeningNumber
+  +String? picture
+  +String? status
+  +String? donationAmount
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::kontak.dart::Kontak" {
+  +int? id
+  +int? rukunTetanggaId
+  +int? index
+  +String? name
+  +String? phoneNumber
+  +String? position
+  +String? house
+  +String? address
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::polling.dart::Polling" {
+  +int? id
+  +int? rukunTetanggaId
+  +String? title
+  +String? description
+  +String? status
+  +String? createdAt
+  +String? updatedAt
+  +List<PollingOptions>? pollingOptions
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::model::polling.dart::PollingOptions" {
+  +int? id
+  +int? pollingId
+  +String? optionName
+  +String? vote
+  +String? createdAt
+  +String? updatedAt
+  +Map<String, dynamic> toJson()
+}
+
+class "rtkita::app::modules::manajemenPolling::bindings::manajemen_polling_binding.dart::ManajemenPollingBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::manajemenPolling::bindings::manajemen_polling_binding.dart::ManajemenPollingBinding"
+
+class "rtkita::app::modules::manajemenPolling::controllers::manajemen_polling_controller.dart::ManajemenPollingController" {
+  +List<Complaint> aduanWarga
+  +dynamic setDataPolling()
+  +void onInit()
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::manajemenPolling::controllers::manajemen_polling_controller.dart::ManajemenPollingController"
+
+class "rtkita::app::modules::manajemenPolling::views::tambah_polling_view.dart::TambahPolling" {
+  +State<TambahPolling> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rtkita::app::modules::manajemenPolling::views::tambah_polling_view.dart::TambahPolling"
+
+class "rtkita::app::modules::manajemenPolling::views::tambah_polling_view.dart::_TambahPollingState" {
+  +TextEditingController titleController
+  +TextEditingController descriptionController
+  +List<TextEditingController> optionControllers
+  +void initState()
+  +Widget build()
+}
+
+"rtkita::app::modules::manajemenPolling::views::tambah_polling_view.dart::_TambahPollingState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "rtkita::app::modules::manajemenPolling::views::tambah_polling_view.dart::_TambahPollingState"
+
+class "rtkita::app::modules::manajemenPolling::views::manajemen_polling_view.dart::ManajemenPollingView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::manajemenPolling::views::manajemen_polling_view.dart::ManajemenPollingView"
+
+class "rtkita::app::modules::donation::bindings::donation_binding.dart::DonationBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::donation::bindings::donation_binding.dart::DonationBinding"
+
+class "rtkita::app::modules::donation::controllers::donation_controller.dart::DonationController" {
+  +List<Donation> donation
+  +TextEditingController jumlah
+  +XFile? dataImage
+  +dynamic setDonation()
+  +dynamic setImage()
+}
+
+"rtkita::app::modules::donation::controllers::donation_controller.dart::DonationController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rtkita::app::modules::donation::controllers::donation_controller.dart::DonationController" o-- "cross_file::src::types::interface.dart::XFile"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::donation::controllers::donation_controller.dart::DonationController"
+
+class "rtkita::app::modules::donation::views::detail_donation_view.dart::DetailDonationView" {
+  +Donation donation
+  +Widget build()
+}
+
+"rtkita::app::modules::donation::views::detail_donation_view.dart::DetailDonationView" o-- "rtkita::app::model::donation.dart::Donation"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::donation::views::detail_donation_view.dart::DetailDonationView"
+
+class "rtkita::app::modules::donation::views::donation_view.dart::DonationView" {
+  +DonationProvider donationProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::donation::views::donation_view.dart::DonationView" o-- "rtkita::app::providers::donation.dart::DonationProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::donation::views::donation_view.dart::DonationView"
+
+class "rtkita::app::modules::donation::views::donasi.dart::DonasiView" {
+  +Donation donation
+  +DonationProvider donationProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::donation::views::donasi.dart::DonasiView" o-- "rtkita::app::model::donation.dart::Donation"
+"rtkita::app::modules::donation::views::donasi.dart::DonasiView" o-- "rtkita::app::providers::donation.dart::DonationProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::donation::views::donasi.dart::DonasiView"
+
+class "rtkita::app::modules::donation::views::detail.dart::DetailView" {
+  +Donation donation
+  +Widget build()
+}
+
+"rtkita::app::modules::donation::views::detail.dart::DetailView" o-- "rtkita::app::model::donation.dart::Donation"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::donation::views::detail.dart::DetailView"
+
+class "rtkita::app::modules::home::bindings::home_binding.dart::HomeBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::home::bindings::home_binding.dart::HomeBinding"
+
+class "rtkita::app::modules::home::controllers::home_controller.dart::HomeController" {
+  +GetStorage box
+  +bool loading
+  +String? fcmToken
+  +List<Announcement> announcement
+  +dynamic setAnnouncementData()
+  +dynamic getToken()
+  +dynamic loadingStatus()
+  +void onInit()
+}
+
+"rtkita::app::modules::home::controllers::home_controller.dart::HomeController" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::home::controllers::home_controller.dart::HomeController"
+
+class "rtkita::app::modules::home::views::home_view.dart::HomeView" {
+  +HomeController homeController
+  +AnnouncementProvider announcementProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::home::views::home_view.dart::HomeView" o-- "rtkita::app::modules::home::controllers::home_controller.dart::HomeController"
+"rtkita::app::modules::home::views::home_view.dart::HomeView" o-- "rtkita::app::providers::announcement.dart::AnnouncementProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::home::views::home_view.dart::HomeView"
+
+class "rtkita::app::modules::verif_otp::bindings::verif_otp_binding.dart::VerifOtpBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::verif_otp::bindings::verif_otp_binding.dart::VerifOtpBinding"
+
+class "rtkita::app::modules::verif_otp::controllers::verif_otp_controller.dart::VerifOtpController" {
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::verif_otp::controllers::verif_otp_controller.dart::VerifOtpController"
+
+class "rtkita::app::modules::verif_otp::views::verif_otp_view.dart::VerifOtpView" {
+  +int otpCode
+  +TextEditingController otp
+  +Widget build()
+}
+
+"rtkita::app::modules::verif_otp::views::verif_otp_view.dart::VerifOtpView" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::verif_otp::views::verif_otp_view.dart::VerifOtpView"
+
+class "rtkita::app::modules::verif_kk::bindings::verif_kk_binding.dart::VerifKkBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::verif_kk::bindings::verif_kk_binding.dart::VerifKkBinding"
+
+class "rtkita::app::modules::verif_kk::controllers::verif_kk_controller.dart::VerifKkController" {
+  +TextEditingController nomorKK
+  +FamilyCard? familyCard
+  +dynamic setFamilyCard()
+}
+
+"rtkita::app::modules::verif_kk::controllers::verif_kk_controller.dart::VerifKkController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rtkita::app::modules::verif_kk::controllers::verif_kk_controller.dart::VerifKkController" o-- "rtkita::app::model::family_card.dart::FamilyCard"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::verif_kk::controllers::verif_kk_controller.dart::VerifKkController"
+
+class "rtkita::app::modules::verif_kk::views::verif_kk_view.dart::VerifKkView" {
+  +VerifKKProvider verifKKProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::verif_kk::views::verif_kk_view.dart::VerifKkView" o-- "rtkita::app::providers::verifikasi_kk.dart::VerifKKProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::verif_kk::views::verif_kk_view.dart::VerifKkView"
+
+class "rtkita::app::modules::manajemenPersuratan::bindings::manajemen_persuratan_binding.dart::ManajemenPersuratanBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::manajemenPersuratan::bindings::manajemen_persuratan_binding.dart::ManajemenPersuratanBinding"
+
+class "rtkita::app::modules::manajemenPersuratan::controllers::manajemen_persuratan_controller.dart::ManajemenPersuratanController" {
+  +List<CoverLetter?>? manajemenPersuratan
+  +dynamic setManajemenPersuratan()
+  +void onInit()
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::manajemenPersuratan::controllers::manajemen_persuratan_controller.dart::ManajemenPersuratanController"
+
+class "rtkita::app::modules::manajemenPersuratan::views::manajemen_persuratan_view.dart::ManajemenPersuratanView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::manajemenPersuratan::views::manajemen_persuratan_view.dart::ManajemenPersuratanView"
+
+class "rtkita::app::modules::manajemenAduanWarga::bindings::manajemen_aduan_warga_binding.dart::ManajemenAduanWargaBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::manajemenAduanWarga::bindings::manajemen_aduan_warga_binding.dart::ManajemenAduanWargaBinding"
+
+class "rtkita::app::modules::manajemenAduanWarga::controllers::manajemen_aduan_warga_controller.dart::ManajemenAduanWargaController" {
+  +List<Complaint> aduanWarga
+  +dynamic setDataAduanWarga()
+  +void onInit()
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::manajemenAduanWarga::controllers::manajemen_aduan_warga_controller.dart::ManajemenAduanWargaController"
+
+class "rtkita::app::modules::manajemenAduanWarga::views::manajemen_aduan_warga_view.dart::ManajemenAduanWargaView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::manajemenAduanWarga::views::manajemen_aduan_warga_view.dart::ManajemenAduanWargaView"
+
+class "rtkita::app::modules::lupa_telepon::bindings::lupa_telepon_binding.dart::LupaTeleponBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::lupa_telepon::bindings::lupa_telepon_binding.dart::LupaTeleponBinding"
+
+class "rtkita::app::modules::lupa_telepon::controllers::lupa_telepon_controller.dart::LupaTeleponController" {
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::lupa_telepon::controllers::lupa_telepon_controller.dart::LupaTeleponController"
+
+class "rtkita::app::modules::lupa_telepon::views::lupa_telepon_view.dart::LupaTeleponView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::lupa_telepon::views::lupa_telepon_view.dart::LupaTeleponView"
+
+class "rtkita::app::modules::peta::bindings::peta_binding.dart::PetaBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::peta::bindings::peta_binding.dart::PetaBinding"
+
+class "rtkita::app::modules::peta::controllers::peta_controller.dart::PetaController" {
+  +Completer<GoogleMapController> mapController
+  +CameraPosition defaultPlace
+  +Map<MarkerId, Marker> markers
+  +dynamic updateMarker()
+}
+
+"rtkita::app::modules::peta::controllers::peta_controller.dart::PetaController" o-- "dart::async::Completer<GoogleMapController>"
+"rtkita::app::modules::peta::controllers::peta_controller.dart::PetaController" o-- "google_maps_flutter_platform_interface::src::types::camera.dart::CameraPosition"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::peta::controllers::peta_controller.dart::PetaController"
+
+class "rtkita::app::modules::peta::views::peta_view.dart::PetaView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::peta::views::peta_view.dart::PetaView"
+
+class "rtkita::app::modules::manajemenPengumuman::bindings::manajemen_pengumuman_binding.dart::ManajemenPengumumanBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::manajemenPengumuman::bindings::manajemen_pengumuman_binding.dart::ManajemenPengumumanBinding"
+
+class "rtkita::app::modules::manajemenPengumuman::controllers::manajemen_pengumuman_controller.dart::ManajemenPengumumanController" {
+  +TextEditingController title
+  +TextEditingController description
+  +RxInt count
+  +void onInit()
+  +void onReady()
+  +void onClose()
+  +void increment()
+}
+
+"rtkita::app::modules::manajemenPengumuman::controllers::manajemen_pengumuman_controller.dart::ManajemenPengumumanController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rtkita::app::modules::manajemenPengumuman::controllers::manajemen_pengumuman_controller.dart::ManajemenPengumumanController" o-- "get::get_rx::src::rx_types::rx_types.dart::RxInt"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::manajemenPengumuman::controllers::manajemen_pengumuman_controller.dart::ManajemenPengumumanController"
+
+class "rtkita::app::modules::manajemenPengumuman::views::manajemen_pengumuman_view.dart::ManajemenPengumumanView" {
+  +AnnouncementProvider p
+  +Widget build()
+}
+
+"rtkita::app::modules::manajemenPengumuman::views::manajemen_pengumuman_view.dart::ManajemenPengumumanView" o-- "rtkita::app::providers::announcement.dart::AnnouncementProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::manajemenPengumuman::views::manajemen_pengumuman_view.dart::ManajemenPengumumanView"
+
+class "rtkita::app::modules::lupa_password::bindings::lupa_password_binding.dart::LupaPasswordBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::lupa_password::bindings::lupa_password_binding.dart::LupaPasswordBinding"
+
+class "rtkita::app::modules::lupa_password::controllers::lupa_password_controller.dart::LupaPasswordController" {
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::lupa_password::controllers::lupa_password_controller.dart::LupaPasswordController"
+
+class "rtkita::app::modules::lupa_password::views::lupa_password_view.dart::LupaPasswordView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::lupa_password::views::lupa_password_view.dart::LupaPasswordView"
+
+class "rtkita::app::modules::tab_decider::bindings::tab_decider_binding.dart::TabDeciderBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::tab_decider::bindings::tab_decider_binding.dart::TabDeciderBinding"
+
+class "rtkita::app::modules::tab_decider::controllers::tab_decider_controller.dart::TabDeciderController" {
+  +GetStorage box
+  +FamilyMember? user
+  +int currentPage
+  +void getUser()
+  +void changePage()
+  +void onInit()
+}
+
+"rtkita::app::modules::tab_decider::controllers::tab_decider_controller.dart::TabDeciderController" o-- "get_storage::src::storage_impl.dart::GetStorage"
+"rtkita::app::modules::tab_decider::controllers::tab_decider_controller.dart::TabDeciderController" o-- "rtkita::app::model::family_member.dart::FamilyMember"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::tab_decider::controllers::tab_decider_controller.dart::TabDeciderController"
+
+class "rtkita::app::modules::tab_decider::views::terms_view.dart::TermsView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::tab_decider::views::terms_view.dart::TermsView"
+
+class "rtkita::app::modules::tab_decider::views::tab_decider_view.dart::TabDeciderView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::tab_decider::views::tab_decider_view.dart::TabDeciderView"
+
+class "rtkita::app::modules::tab_decider::views::privacy_view.dart::PrivacyView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::tab_decider::views::privacy_view.dart::PrivacyView"
+
+class "rtkita::app::modules::tab_decider::views::about_view.dart::AboutView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::tab_decider::views::about_view.dart::AboutView"
+
+class "rtkita::app::modules::Manajemen_Iuran::bindings::manajemen_iuran_binding.dart::ManajemenIuranBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::Manajemen_Iuran::bindings::manajemen_iuran_binding.dart::ManajemenIuranBinding"
+
+class "rtkita::app::modules::Manajemen_Iuran::controllers::manajemen_iuran_controller.dart::ManajemenIuranController" {
+  +List<Payment> payments
+  +dynamic setDataPembayaran()
+  +dynamic convertDate()
+  +void onInit()
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::Manajemen_Iuran::controllers::manajemen_iuran_controller.dart::ManajemenIuranController"
+
+class "rtkita::app::modules::Manajemen_Iuran::views::detail_pembayaran.dart::DetailPembayaranView" {
+  +Payment payment
+  +ManajemenIuranController c
+  +Widget build()
+}
+
+"rtkita::app::modules::Manajemen_Iuran::views::detail_pembayaran.dart::DetailPembayaranView" o-- "rtkita::app::model::payment.dart::Payment"
+"rtkita::app::modules::Manajemen_Iuran::views::detail_pembayaran.dart::DetailPembayaranView" o-- "rtkita::app::modules::Manajemen_Iuran::controllers::manajemen_iuran_controller.dart::ManajemenIuranController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::app::modules::Manajemen_Iuran::views::detail_pembayaran.dart::DetailPembayaranView"
+
+class "rtkita::app::modules::Manajemen_Iuran::views::manajemen_iuran_view.dart::ManajemenIuranView" {
+  +DonationProvider donationProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::Manajemen_Iuran::views::manajemen_iuran_view.dart::ManajemenIuranView" o-- "rtkita::app::providers::donation.dart::DonationProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::Manajemen_Iuran::views::manajemen_iuran_view.dart::ManajemenIuranView"
+
+class "rtkita::app::modules::epolling::bindings::epolling_binding.dart::EpollingBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::epolling::bindings::epolling_binding.dart::EpollingBinding"
+
+class "rtkita::app::modules::epolling::controllers::epolling_controller.dart::EpollingController" {
+  +List<Polling?> polling
+  +dynamic dataPolling
+  +bool newData
+  +bool alreadyVote
+  +dynamic setNewDataStatus()
+  +dynamic setPolling()
+  +dynamic updateVote()
+  +dynamic setDataPolling()
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::epolling::controllers::epolling_controller.dart::EpollingController"
+
+class "rtkita::app::modules::epolling::views::epolling_view.dart::EpollingView" {
+  +EpollingController c
+  +PollingProvider pollingProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::epolling::views::epolling_view.dart::EpollingView" o-- "rtkita::app::modules::epolling::controllers::epolling_controller.dart::EpollingController"
+"rtkita::app::modules::epolling::views::epolling_view.dart::EpollingView" o-- "rtkita::app::providers::polling.dart::PollingProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::epolling::views::epolling_view.dart::EpollingView"
+
+class "rtkita::app::modules::epolling::views::detail_epolling_view.dart::DetailEpollingView" {
+  +Polling? polling
+  +PollingProvider pollingProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::epolling::views::detail_epolling_view.dart::DetailEpollingView" o-- "rtkita::app::model::polling.dart::Polling"
+"rtkita::app::modules::epolling::views::detail_epolling_view.dart::DetailEpollingView" o-- "rtkita::app::providers::polling.dart::PollingProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::epolling::views::detail_epolling_view.dart::DetailEpollingView"
+
+class "rtkita::app::modules::register::bindings::register_binding.dart::RegisterBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::register::bindings::register_binding.dart::RegisterBinding"
+
+class "rtkita::app::modules::register::controllers::register_controller.dart::RegisterController" {
+  +TextEditingController namaLengkap
+  +TextEditingController nik
+  +TextEditingController ttl
+  +TextEditingController pekerjaan
+  +TextEditingController telepon
+  +TextEditingController password
+  +String gender
+  +List<FamilyMember?> familyMember
+  +FamilyMember? selectedFamilyMember
+  +dynamic setFamilyMember()
+  +dynamic selectFamilyMember()
+  +void onClose()
+}
+
+"rtkita::app::modules::register::controllers::register_controller.dart::RegisterController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rtkita::app::modules::register::controllers::register_controller.dart::RegisterController" o-- "rtkita::app::model::family_member.dart::FamilyMember"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::register::controllers::register_controller.dart::RegisterController"
+
+class "rtkita::app::modules::register::views::register_view.dart::RegisterView" {
+  +AuthProvider registerProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::register::views::register_view.dart::RegisterView" o-- "rtkita::app::providers::auth.dart::AuthProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::register::views::register_view.dart::RegisterView"
+
+class "rtkita::app::modules::iuran::bindings::iuran_binding.dart::IuranBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::iuran::bindings::iuran_binding.dart::IuranBinding"
+
+class "rtkita::app::modules::iuran::controllers::iuran_controller.dart::IuranController" {
+  +RxInt count
+  +void onInit()
+  +void onReady()
+  +void onClose()
+  +void increment()
+}
+
+"rtkita::app::modules::iuran::controllers::iuran_controller.dart::IuranController" o-- "get::get_rx::src::rx_types::rx_types.dart::RxInt"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::iuran::controllers::iuran_controller.dart::IuranController"
+
+class "rtkita::app::modules::iuran::views::iuran_view.dart::IuranView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::iuran::views::iuran_view.dart::IuranView"
+
+class "rtkita::app::modules::profile::bindings::profile_binding.dart::ProfileBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::profile::bindings::profile_binding.dart::ProfileBinding"
+
+class "rtkita::app::modules::profile::controllers::profile_controller.dart::ProfileController" {
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::profile::controllers::profile_controller.dart::ProfileController"
+
+class "rtkita::app::modules::profile::views::profile_view.dart::ProfileView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::profile::views::profile_view.dart::ProfileView"
+
+class "rtkita::app::modules::aduan::bindings::aduan_binding.dart::AduanBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::aduan::bindings::aduan_binding.dart::AduanBinding"
+
+class "rtkita::app::modules::aduan::controllers::aduan_controller.dart::AduanController" {
+  +TextEditingController title
+  +TextEditingController description
+  +XFile? photo
+  +List<Complaint>? aduan
+  +List<Complaint> historyAduan
+  +dynamic setDataAduan()
+  +dynamic setDataHistoryAduan()
+  +void setImage()
+  +void onInit()
+}
+
+"rtkita::app::modules::aduan::controllers::aduan_controller.dart::AduanController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rtkita::app::modules::aduan::controllers::aduan_controller.dart::AduanController" o-- "cross_file::src::types::interface.dart::XFile"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::aduan::controllers::aduan_controller.dart::AduanController"
+
+class "rtkita::app::modules::aduan::views::detail_aduan_view.dart::DetailAduanView" {
+  +Complaint aduan
+  +Widget build()
+}
+
+"rtkita::app::modules::aduan::views::detail_aduan_view.dart::DetailAduanView" o-- "rtkita::app::model::complaint.dart::Complaint"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::aduan::views::detail_aduan_view.dart::DetailAduanView"
+
+class "rtkita::app::modules::aduan::views::aduan_view.dart::AduanView" {
+  +AduanProvider aduanProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::aduan::views::aduan_view.dart::AduanView" o-- "rtkita::app::providers::complaint.dart::AduanProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::aduan::views::aduan_view.dart::AduanView"
+
+class "rtkita::app::modules::aduan::views::add_aduan_view.dart::AddAduanView" {
+  +AduanProvider p
+  +Widget build()
+}
+
+"rtkita::app::modules::aduan::views::add_aduan_view.dart::AddAduanView" o-- "rtkita::app::providers::complaint.dart::AduanProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::aduan::views::add_aduan_view.dart::AddAduanView"
+
+class "rtkita::app::modules::splash_screen::bindings::splash_screen_binding.dart::SplashScreenBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::splash_screen::bindings::splash_screen_binding.dart::SplashScreenBinding"
+
+class "rtkita::app::modules::splash_screen::controllers::splash_screen_controller.dart::SplashScreenController" {
+  +void pageDecider()
+  +void onInit()
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::splash_screen::controllers::splash_screen_controller.dart::SplashScreenController"
+
+class "rtkita::app::modules::splash_screen::views::splash_screen_view.dart::SplashScreenView" {
+  +SplashScreenController c
+  +Widget build()
+}
+
+"rtkita::app::modules::splash_screen::views::splash_screen_view.dart::SplashScreenView" o-- "rtkita::app::modules::splash_screen::controllers::splash_screen_controller.dart::SplashScreenController"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::splash_screen::views::splash_screen_view.dart::SplashScreenView"
+
+class "rtkita::app::modules::berita::bindings::berita_binding.dart::BeritaBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::berita::bindings::berita_binding.dart::BeritaBinding"
+
+class "rtkita::app::modules::berita::controllers::berita_controller.dart::BeritaController" {
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::berita::controllers::berita_controller.dart::BeritaController"
+
+class "rtkita::app::modules::berita::views::berita_view.dart::BeritaView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::berita::views::berita_view.dart::BeritaView"
+
+class "rtkita::app::modules::pengumuman::bindings::pengumuman_binding.dart::PengumumanBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::pengumuman::bindings::pengumuman_binding.dart::PengumumanBinding"
+
+class "rtkita::app::modules::pengumuman::controllers::pengumuman_controller.dart::PengumumanController" {
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::pengumuman::controllers::pengumuman_controller.dart::PengumumanController"
+
+class "rtkita::app::modules::pengumuman::views::pengumuman_view.dart::PengumumanView" {
+  +AnnouncementProvider announcementProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::pengumuman::views::pengumuman_view.dart::PengumumanView" o-- "rtkita::app::providers::announcement.dart::AnnouncementProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::pengumuman::views::pengumuman_view.dart::PengumumanView"
+
+class "rtkita::app::modules::persuratan::bindings::persuratan_binding.dart::PersuratanBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::persuratan::bindings::persuratan_binding.dart::PersuratanBinding"
+
+class "rtkita::app::modules::persuratan::controllers::persuratan_controller.dart::PersuratanController" {
+  +TextEditingController namaLengkap
+  +TextEditingController deskripsiSurat
+  +List<FamilyMember?> familyMember
+  +List<CoverLetter?>? coverLetter
+  +FamilyMember? selectedFamilyMember
+  +dynamic setFamilyMember()
+  +dynamic setCoverLetter()
+  +dynamic selectFamilyMember()
+}
+
+"rtkita::app::modules::persuratan::controllers::persuratan_controller.dart::PersuratanController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rtkita::app::modules::persuratan::controllers::persuratan_controller.dart::PersuratanController" o-- "rtkita::app::model::family_member.dart::FamilyMember"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::persuratan::controllers::persuratan_controller.dart::PersuratanController"
+
+class "rtkita::app::modules::persuratan::views::persuratan_view.dart::PersuratanView" {
+  +PersuratanProvider persuratanProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::persuratan::views::persuratan_view.dart::PersuratanView" o-- "rtkita::app::providers::persuratan.dart::PersuratanProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::persuratan::views::persuratan_view.dart::PersuratanView"
+
+class "rtkita::app::modules::persuratan::views::detail_add_persuratan_view.dart::DetailAddPersuratanView" {
+  +String text
+  +PersuratanProvider persuratanProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::persuratan::views::detail_add_persuratan_view.dart::DetailAddPersuratanView" o-- "rtkita::app::providers::persuratan.dart::PersuratanProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::persuratan::views::detail_add_persuratan_view.dart::DetailAddPersuratanView"
+
+class "rtkita::app::modules::persuratan::views::add_persuratan_view.dart::AddPersuratanView" {
+  +Widget build()
+}
+
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::persuratan::views::add_persuratan_view.dart::AddPersuratanView"
+
+class "rtkita::app::modules::kontak::bindings::kontak_binding.dart::KontakBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::kontak::bindings::kontak_binding.dart::KontakBinding"
+
+class "rtkita::app::modules::kontak::controllers::kontak_controller.dart::KontakController" {
+  +List<Kontak> kontak
+  +dynamic setKontak()
+}
+
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::kontak::controllers::kontak_controller.dart::KontakController"
+
+class "rtkita::app::modules::kontak::views::kontak_view.dart::KontakView" {
+  +KontakController c
+  +KontakProvider kontakProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::kontak::views::kontak_view.dart::KontakView" o-- "rtkita::app::modules::kontak::controllers::kontak_controller.dart::KontakController"
+"rtkita::app::modules::kontak::views::kontak_view.dart::KontakView" o-- "rtkita::app::providers::kontak_darurat.dart::KontakProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::kontak::views::kontak_view.dart::KontakView"
+
+class "rtkita::app::modules::login::bindings::login_binding.dart::LoginBinding" {
+  +void dependencies()
+}
+
+"get::get_instance::src::bindings_interface.dart::Bindings" <|-- "rtkita::app::modules::login::bindings::login_binding.dart::LoginBinding"
+
+class "rtkita::app::modules::login::controllers::login_controller.dart::LoginController" {
+  +TextEditingController telepon
+  +TextEditingController password
+  +FamilyMember? selectedFamilyMember
+  +bool obscureText
+  +bool terms
+  +dynamic setObscure()
+  +dynamic setTerms()
+  +dynamic selectFamilyMember()
+}
+
+"rtkita::app::modules::login::controllers::login_controller.dart::LoginController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rtkita::app::modules::login::controllers::login_controller.dart::LoginController" o-- "rtkita::app::model::family_member.dart::FamilyMember"
+"get::get_state_manager::src::simple::get_controllers.dart::GetxController" <|-- "rtkita::app::modules::login::controllers::login_controller.dart::LoginController"
+
+class "rtkita::app::modules::login::views::login_view.dart::LoginView" {
+  +AuthProvider loginProvider
+  +Widget build()
+}
+
+"rtkita::app::modules::login::views::login_view.dart::LoginView" o-- "rtkita::app::providers::auth.dart::AuthProvider"
+"get::get_state_manager::src::simple::get_view.dart::GetView" <|-- "rtkita::app::modules::login::views::login_view.dart::LoginView"
+
+class "rtkita::app::routes::app_pages.dart::AppPages" {
+  {static} +String INITIAL
+  {static} +List<GetPage<dynamic>> routes
+}
+
+abstract class "rtkita::app::routes::app_pages.dart::Routes" {
+  {static} +String HOME
+  {static} +String SPLASH_SCREEN
+  {static} +String LOGIN
+  {static} +String LUPA_PASSWORD
+  {static} +String LUPA_TELEPON
+  {static} +String VERIF_KK
+  {static} +String REGISTER
+  {static} +String VERIF_OTP
+  {static} +String TAB_DECIDER
+  {static} +String EPOLLING
+  {static} +String PROFILE
+  {static} +String KONTAK
+  {static} +String PERSURATAN
+  {static} +String ADUAN
+  {static} +String TAGIHAN
+  {static} +String PENGUMUMAN
+  {static} +String BERITA
+  {static} +String UMKM
+  {static} +String MIDTRANS
+  {static} +String PETA
+  {static} +String CHAT
+  {static} +String DONATION
+  {static} +String STATISIK
+  {static} +String DETAIL_ADUAN
+  {static} +String MANAJEMEN_ADUAN_WARGA
+  {static} +String MANAJEMEN_PERSURATAN
+  {static} +String DETAIL_DONATION
+  {static} +String MANAJEMEN_PENGUMUMAN
+  {static} +String MANAJEMEN_IURAN
+  {static} +String IURAN
+}
+
+abstract class "rtkita::app::routes::app_pages.dart::_Paths" {
+  {static} +String HOME
+  {static} +String SPLASH_SCREEN
+  {static} +String LOGIN
+  {static} +String LUPA_PASSWORD
+  {static} +String LUPA_TELEPON
+  {static} +String VERIF_KK
+  {static} +String REGISTER
+  {static} +String VERIF_OTP
+  {static} +String TAB_DECIDER
+  {static} +String EPOLLING
+  {static} +String PROFILE
+  {static} +String KONTAK
+  {static} +String PERSURATAN
+  {static} +String ADUAN
+  {static} +String TAGIHAN
+  {static} +String PENGUMUMAN
+  {static} +String BERITA
+  {static} +String UMKM
+  {static} +String MIDTRANS
+  {static} +String PETA
+  {static} +String CHAT
+  {static} +String DONATION
+  {static} +String STATISIK
+  {static} +String DETAIL_ADUAN
+  {static} +String MANAJEMEN_ADUAN_WARGA
+  {static} +String MANAJEMEN_PERSURATAN
+  {static} +String DETAIL_DONATION
+  {static} +String MANAJEMEN_PENGUMUMAN
+  {static} +String MANAJEMEN_IURAN
+  {static} +String IURAN
+}
+
+class "rtkita::firebase_options.dart::DefaultFirebaseOptions" {
+  {static} +FirebaseOptions android
+  {static} +FirebaseOptions ios
+  {static} +FirebaseOptions currentPlatform
+}
+
+"rtkita::firebase_options.dart::DefaultFirebaseOptions" o-- "firebase_core_platform_interface::firebase_core_platform_interface.dart::FirebaseOptions"
+
+class "rtkita::notification_service.dart::NotificationService" {
+  -FlutterLocalNotificationsPlugin _localNotifications
+  +Future<void> initializePlatformNotifications()
+  +void onDidReceiveLocalNotification()
+  -Future<NotificationDetails> _notificationDetails()
+  +Future<void> showLocalNotification()
+}
+
+"rtkita::notification_service.dart::NotificationService" o-- "flutter_local_notifications::src::flutter_local_notifications_plugin.dart::FlutterLocalNotificationsPlugin"
+
+class "rtkita::widgets::card_surat.dart::CardSurat" {
+  +String text
+  +PersuratanProvider persuratanProvider
+  +Widget build()
+}
+
+"rtkita::widgets::card_surat.dart::CardSurat" o-- "rtkita::app::providers::persuratan.dart::PersuratanProvider"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::card_surat.dart::CardSurat"
+
+class "rtkita::widgets::dashed_rect.dart::DashedRect" {
+  +Color color
+  +double strokeWidth
+  +double gap
+  +Widget build()
+}
+
+"rtkita::widgets::dashed_rect.dart::DashedRect" o-- "dart::ui::Color"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::dashed_rect.dart::DashedRect"
+
+class "rtkita::widgets::dashed_rect.dart::DashRectPainter" {
+  +double strokeWidth
+  +Color color
+  +double gap
+  +void paint()
+  +Path getDashedPath()
+  +bool shouldRepaint()
+}
+
+"rtkita::widgets::dashed_rect.dart::DashRectPainter" o-- "dart::ui::Color"
+"flutter::src::rendering::custom_paint.dart::CustomPainter" <|-- "rtkita::widgets::dashed_rect.dart::DashRectPainter"
+
+class "rtkita::widgets::text.dart::CText" {
+  +String data
+  +Color? color
+  +double? fontSize
+  +FontWeight? fontWeight
+  +int? maxLines
+  +TextOverflow? overflow
+  +TextAlign? textAlign
+  +Widget build()
+}
+
+"rtkita::widgets::text.dart::CText" o-- "dart::ui::Color"
+"rtkita::widgets::text.dart::CText" o-- "dart::ui::FontWeight"
+"rtkita::widgets::text.dart::CText" o-- "flutter::src::painting::text_painter.dart::TextOverflow"
+"rtkita::widgets::text.dart::CText" o-- "dart::ui::TextAlign"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::text.dart::CText"
+
+class "rtkita::widgets::text.dart::HeaderText" {
+  +String text
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::text.dart::HeaderText"
+
+class "rtkita::widgets::text.dart::SubHeaderText" {
+  +String text
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::text.dart::SubHeaderText"
+
+class "rtkita::widgets::text.dart::SubText" {
+  +String text
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::text.dart::SubText"
+
+class "rtkita::widgets::button.dart::PrimaryButton" {
+  +String text
+  +void Function() onTap
+  +Widget build()
+}
+
+"rtkita::widgets::button.dart::PrimaryButton" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::button.dart::PrimaryButton"
+
+class "rtkita::widgets::button.dart::SecondaryButton" {
+  +String text
+  +void Function() onTap
+  +Widget build()
+}
+
+"rtkita::widgets::button.dart::SecondaryButton" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::button.dart::SecondaryButton"
+
+class "rtkita::widgets::dialog.dart::SimpleBoxDialog" {
+  +String title
+  +String? subtitle
+  +String buttonText
+  +String secondaryButtonText
+  +void Function()? onTapPrimary
+  +void Function()? onTapSecondary
+  +Widget? child
+  +dynamic dialogContent()
+  +Widget build()
+}
+
+"rtkita::widgets::dialog.dart::SimpleBoxDialog" o-- "dart::ui::void Function()"
+"rtkita::widgets::dialog.dart::SimpleBoxDialog" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::dialog.dart::SimpleBoxDialog"
+
+class "rtkita::widgets::full_screen_image.dart::FullScreenImage" {
+  +String image
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::full_screen_image.dart::FullScreenImage"
+
+class "rtkita::widgets::card_berita.dart::CardBerita" {
+  +String account
+  +String description
+  +String time
+  +String picture
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::card_berita.dart::CardBerita"
+
+class "rtkita::widgets::section_part.dart::SectionPart" {
+  +String text
+  +void Function()? onTap
+  +Widget build()
+}
+
+"rtkita::widgets::section_part.dart::SectionPart" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::section_part.dart::SectionPart"
+
+class "rtkita::widgets::header_section.dart::HeaderSection" {
+  +String headerText
+  +String? subheaderText
+  +String? subText
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::header_section.dart::HeaderSection"
+
+class "rtkita::widgets::list_action.dart::ListAction" {
+  +String text
+  +void Function() onTap
+  +Widget build()
+}
+
+"rtkita::widgets::list_action.dart::ListAction" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::list_action.dart::ListAction"
+
+class "rtkita::widgets::card_aduan.dart::CardAduan" {
+  +String title
+  +String description
+  +String status
+  +String tanggal
+  +String document
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::card_aduan.dart::CardAduan"
+
+class "rtkita::widgets::shimmer_loading.dart::_SlidingGradientTransform" {
+  +double slidePercent
+  +Matrix4? transform()
+}
+
+"flutter::src::painting::gradient.dart::GradientTransform" <|-- "rtkita::widgets::shimmer_loading.dart::_SlidingGradientTransform"
+
+class "rtkita::widgets::shimmer_loading.dart::Shimmer" {
+  +LinearGradient linearGradient
+  +Widget? child
+  {static} +ShimmerState? of()
+  +ShimmerState createState()
+}
+
+"rtkita::widgets::shimmer_loading.dart::Shimmer" o-- "flutter::src::painting::gradient.dart::LinearGradient"
+"rtkita::widgets::shimmer_loading.dart::Shimmer" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rtkita::widgets::shimmer_loading.dart::Shimmer"
+
+class "rtkita::widgets::shimmer_loading.dart::ShimmerState" {
+  -AnimationController _shimmerController
+  +LinearGradient gradient
+  +bool isSized
+  +Size size
+  +Listenable shimmerChanges
+  +void initState()
+  +void dispose()
+  +Offset getDescendantOffset()
+  +Widget build()
+}
+
+"rtkita::widgets::shimmer_loading.dart::ShimmerState" o-- "flutter::src::animation::animation_controller.dart::AnimationController"
+"rtkita::widgets::shimmer_loading.dart::ShimmerState" o-- "flutter::src::painting::gradient.dart::LinearGradient"
+"rtkita::widgets::shimmer_loading.dart::ShimmerState" o-- "dart::ui::Size"
+"rtkita::widgets::shimmer_loading.dart::ShimmerState" o-- "flutter::src::foundation::change_notifier.dart::Listenable"
+"flutter::src::widgets::framework.dart::State" <|-- "rtkita::widgets::shimmer_loading.dart::ShimmerState"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "rtkita::widgets::shimmer_loading.dart::ShimmerState"
+
+class "rtkita::widgets::shimmer_loading.dart::ShimmerLoading" {
+  +bool isLoading
+  +Widget child
+  +State<ShimmerLoading> createState()
+}
+
+"rtkita::widgets::shimmer_loading.dart::ShimmerLoading" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rtkita::widgets::shimmer_loading.dart::ShimmerLoading"
+
+class "rtkita::widgets::shimmer_loading.dart::_ShimmerLoadingState" {
+  -Listenable? _shimmerChanges
+  +void didChangeDependencies()
+  +void dispose()
+  -void _onShimmerChange()
+  +Widget build()
+}
+
+"rtkita::widgets::shimmer_loading.dart::_ShimmerLoadingState" o-- "flutter::src::foundation::change_notifier.dart::Listenable"
+"flutter::src::widgets::framework.dart::State" <|-- "rtkita::widgets::shimmer_loading.dart::_ShimmerLoadingState"
+
+class "rtkita::widgets::chat_bubble.dart::ChatBubble" {
+  +bool other
+  +String username
+  +String message
+  +String created_at
+  +String? file
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::chat_bubble.dart::ChatBubble"
+
+class "rtkita::widgets::menu_item.dart::CMenuItem" {
+  +IconData icon
+  +String text
+  +void Function() onTap
+  +Widget build()
+}
+
+"rtkita::widgets::menu_item.dart::CMenuItem" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"rtkita::widgets::menu_item.dart::CMenuItem" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::menu_item.dart::CMenuItem"
+
+class "rtkita::widgets::body_builder.dart::BodyBuilder" {
+  +Widget child
+  +Widget build()
+}
+
+"rtkita::widgets::body_builder.dart::BodyBuilder" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::body_builder.dart::BodyBuilder"
+
+class "rtkita::widgets::statistik_item.dart::StatistikItem" {
+  +IconData icon
+  +String title
+  +String subtitle
+  +Color iconColor
+  +Widget build()
+}
+
+"rtkita::widgets::statistik_item.dart::StatistikItem" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"rtkita::widgets::statistik_item.dart::StatistikItem" o-- "dart::ui::Color"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::statistik_item.dart::StatistikItem"
+
+class "rtkita::widgets::navigation.dart::ItemNavbar" {
+  +dynamic active
+  +IconData? icon
+  +dynamic itemName
+  +Widget build()
+}
+
+"rtkita::widgets::navigation.dart::ItemNavbar" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::navigation.dart::ItemNavbar"
+
+class "rtkita::widgets::card_produk.dart::CardProduk" {
+  +String title
+  +String penjual
+  +String harga
+  +String picture
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rtkita::widgets::card_produk.dart::CardProduk"
+
+@enduml

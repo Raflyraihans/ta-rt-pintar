@@ -13,7 +13,10 @@ class PanicProvider extends GetConnect {
   GetStorage box = GetStorage();
   void sendPanic(context) async {
     try {
-      final response = await get('$urlApi/panic-button',
+      final response = await post('$urlApi/panic-button',
+      {
+        
+      },
           headers: {'Authorization': 'Bearer ' + box.read('token')});
       print(response.bodyString);
       var data = json.decode(response.bodyString.toString());
