@@ -49,9 +49,9 @@ class TabDeciderView extends GetView<TabDeciderController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CText(notification.title!, fontWeight: FontWeight.w700,),
+                        CText("${notification.title!}", fontWeight: FontWeight.w700,),
                         const SizedBox(height: 8,),
-                        CText(notification.body!),
+                        CText("${notification.body!}"),
                         Container(
                           transform: Matrix4.translationValues(0, 30, 0),
                           child: Row(
