@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="id.forestnerd.rtkita">
+    package="id.devif.rtpintar">
    <application
         android:label="RT Pintar"
         android:name="${applicationName}"

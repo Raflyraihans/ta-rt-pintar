@@ -8,7 +8,7 @@
 PRODUCT_NAME = rtkita
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = id.forestnerd.rtkita
+PRODUCT_BUNDLE_IDENTIFIER = id.devif.rtpintar
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 id.forestnerd. All rights reserved.

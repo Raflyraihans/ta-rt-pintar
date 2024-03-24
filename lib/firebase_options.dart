@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '601640809055',
     projectId: 'rt-pintar-6bfbd',
     storageBucket: 'rt-pintar-6bfbd.appspot.com',
-    iosBundleId: 'id.forestnerd.rtkita',
+    iosBundleId: 'id.devif.rtpintar',
   );
 }

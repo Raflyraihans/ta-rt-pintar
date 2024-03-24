@@ -1,4 +1,4 @@
-package id.forestnerd.rtkita
+package id.devif.rtpintar
 
 import io.flutter.embedding.android.FlutterActivity
 
